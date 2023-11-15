@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Congratulations | Cloud Run</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="preload" as="font">
+<link href="/assets/cloud-run-32-color.png" rel="icon" type="image/png" />
+<link href="/assets/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div class="container">
+		<button id="myButton1">Get a joke</button>
+        <p id="responseHeader1"></p>
+        <button id="myButton2">Get a quote</button>
+        <p id="responseHeader2"></p>
+	</div>
+    <script>
+        document.getElementById("myButton1").addEventListener("click", function() {
+            // Replace 'YOUR_GCP_SERVICE_URL' with the actual URL of your GCP service
+            const serviceUrl = 'https://jokes-5bzassrkaq-uc.a.run.app';        
+
+            // Make a fetch request to the GCP service
+           fetch(serviceUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text(); // Parse response body as text
+                })
+                .then(data => {
+                    // Display the joke content in a <p> element
+                    document.getElementById("responseHeader1").textContent = data;
+                    // You can format or manipulate the data as needed
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        });
+
+         document.getElementById("myButton2").addEventListener("click", function() {
+            // Replace 'YOUR_GCP_SERVICE_URL' with the actual URL of your GCP service
+            const serviceUrl = 'https://quotes-5bzassrkaq-uc.a.run.app/';        
+
+            // Make a fetch request to the GCP service
+           fetch(serviceUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text(); // Parse response body as text
+                })
+                .then(data => {
+                    // Display the joke content in a <p> element
+                    document.getElementById("responseHeader2").textContent = data;
+                    // You can format or manipulate the data as needed
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        });
+    </script>
+</body>
+</html>
